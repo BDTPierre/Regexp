@@ -1,11 +1,11 @@
 const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-
-//Rajouter le numéro de téléphone dans la fonction
-
-const number = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9];
+const number = ["0", "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"];
+const mail = ["-" , "." , "@" , "_"];
+const newTable = [...alphabet , ...number , ...mail]
 
 let username = document.getElementById("name").value;
-let userPhoneNumber = parseInt(document.getElementById("phone").value);
+let userPhoneNumber = document.getElementById("phone").value;
+let emailUser = document.getElementById("email").value;
 
 // Étape 1 : le But de la Fonction
 // •	Objectif : Créer une fonction testAlpha qui vérifie si chaque caractère d'une chaîne de caractères (chaine) est présent dans un ensemble spécifié de caractères (alphabet).
@@ -38,5 +38,6 @@ function testAlpha (input , arrayCompare) {
     return true
 };
 
-console.log(testAlpha(username , alphabet));
-console.log(testAlpha(userPhoneNumber , number));
+console.log(testAlpha(username , newTable));
+console.log(testAlpha(userPhoneNumber , newTable));
+console.log(testAlpha(emailUser , newTable));
