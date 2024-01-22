@@ -37,4 +37,53 @@ nom.addEventListener("input", (e) => {
   } else {
     nomValid = false;
   }
-});
+})
+
+
+prenom.addEventListener("input", (e) => {
+  addClass(prenom, userRegex, e.target.value);
+  if (nom.classList.contains("is-valid")) {
+    nomValid = true;
+  } else {
+    nomValid = false;
+  }
+})
+
+email.addEventListener("input", (e) => {
+  addClass(email, emailRegex, e.target.value);
+  if (nom.classList.contains("is-valid")) {
+    nomValid = true;
+  } else {
+    nomValid = false;
+  }
+})
+
+sujet.addEventListener("input", (e) => {
+  addClass(sujet, userRegex, e.target.value);
+  if (nom.classList.contains("is-valid")) {
+    nomValid = true;
+  } else {
+    nomValid = false;
+  }
+})
+
+tel.addEventListener("input", (e) => {
+  addClass(tel, PhoneNumberRegex, e.target.value);
+  if (tel.startsWith("0")) {
+    tel = "+33 + tel.substring(1)"
+  }
+  if (nom.classList.contains("is-valid")) {
+    nomValid = true;
+  } else {
+    nomValid = false;
+  }
+})
+
+message.addEventListener("input", (e) => {
+  addClass(message, userRegex, e.target.value);
+  if (nom.classList.contains("is-valid")) {
+    nomValid = true;
+  } else {
+    nomValid = false;
+  }
+})

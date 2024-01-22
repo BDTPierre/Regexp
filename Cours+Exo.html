@@ -1,0 +1,101 @@
+<!-- 1. Sélection des Éléments du Formulaire
+
+Sélectionner les éléments du formulaire (inputs) du DOM en utilisant document.querySelector. Chaque const représente un champ différent du formulaire :
+•	nomInput, prenomInput, telInput, etc. : ces variables stockent les éléments correspondants du formulaire.
+
+2. Variables de Validation
+let nomValid = false; (et similaires pour les autres champs) : ces variables servent à garder une trace de la validité de chaque champ. Initialement, elles sont toutes false
+
+3. Expressions Régulières (Regex)
+•	UserRegex : valide les noms d'utilisateurs (lettres et tirets, 3 à 23 caractères).
+•	EmailRegex : valide les adresses e-mail{}.
+•	PhoneNumberRegex : valide les numéros de téléphone (avec gestion des indicatifs internationaux).
+•	SujetRegex et MessageRegex : valident le sujet et le message, interdisant certains caractères spéciaux et fixant une longueur minimale/maximale.
+
+4. La Fonction addClass (renvoi soit true , soit false)
+Cette fonction ajoute ou supprime des classes CSS aux éléments du formulaire en fonction de la validité de leurs valeurs :
+•	element: l'élément du formulaire à valider. (balise)
+•	regex: l'expression régulière à utiliser pour la validation.
+•	value: la valeur actuelle de l'élément du formulaire. (input.value)
+•	La fonction utilise regex.test(value) pour vérifier si la valeur correspond à l'expression régulière. Si oui, elle ajoute la classe "is-valid" et supprime "is-invalid", et vice versa.
+
+5. Gestionnaires d'Événements (Event Listeners)
+•	Chaque champ du formulaire a un écouteur d'événements (addEventListener) qui réagit à l'événement "input".
+•	Quand l'utilisateur saisit quelque chose, la fonction addClass est appelée pour ce champ, et la validité est mise à jour (par exemple, nomValid = true si le nom est valide).
+
+6. Validation du Numéro de Téléphone
+•	Pour telInput, le code supprime les espaces et remplace un zéro initial par "+33" (pour les numéros français).
+
+7. Soumission du Formulaire
+•	form.addEventListener("submit", (e) => {...}): ajoute un écouteur d'événements pour la soumission du formulaire.
+•	e.preventDefault(); empêche la soumission automatique du formulaire.
+•	Si tous les champs sont valides (nomValid && prenomValid && ...), il déclenche l'envoi d'un email (utilisant un service d'email via API)
+
+
+
+
+Les expressions régulières (regex) sont des séquences de caractères qui forment un motif de recherche. Elles sont utilisées pour la validation des entrées de texte, la recherche et la manipulation de chaînes.
+
+. Syntaxe de Base des Regex
+•	^ : Début de la chaîne.
+•	$ : Fin de la chaîne.
+•	[ ] : Un ensemble de caractères.
+•	{n,m} : Quantificateur indiquant un minimum de n et un maximum de m occurrences du caractère précédent.
+•	( ) : Groupe de capture.
+•	? : Rend l'élément précédent facultatif (0 ou 1 occurrence).
+•	+ : Un ou plusieurs occurrences de l'élément précédent.
+•	. : Correspond à n'importe quel caractère sauf le saut de ligne.
+•	** : Échappe le caractère spécial suivant.
+
+
+UserRegex: /^[a-zA-Z-]{3,23}$/
+•	^[a-zA-Z-] : Commence par une lettre (majuscule ou minuscule) ou un tiret.
+•	{3,23} : Doit contenir entre 3 et 23 de ces caractères.
+•	$ : Fin de la chaîne.
+EmailRegex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+•	^[a-zA-Z0-9._%+-]+ : Commence par un ou plusieurs caractères alphanumériques ou . _ % + -.
+•	@ : Contient un symbole @.
+•	[a-zA-Z0-9.-]+ : Suivi par un ou plusieurs caractères alphanumériques ou . -.
+•	.[a-zA-Z]{2,} : Se termine par un point suivi d'au moins deux lettres.
+PhoneNumberRegex: /^\+(?:\d{1,3})?\d{10}$/
+•	^+ : Commence par un signe plus (+).
+•	(?:\d{1,3})? : Suivi facultativement par 1 à 3 chiffres (indicatif de pays).
+•	\d{10} : Suivi de 10 chiffres.
+SujetRegex: /^[^<>{}$]{3,200}$/
+•	^[^<>{}$] : Commence par n'importe quel caractère sauf <, >, {, } et $.
+•	{3,200} : Entre 3 et 200 de ces caractères.
+MessageRegex: /^[^<>{}$]{24,}$/
+•	^[^<>{}$] : Commence par n'importe quel caractère sauf <, >, {, } et $.
+•	{24,} : Au moins 24 de ces caractères.
+
+
+https://regex101.com/
+
+
+
+Étape 1 : le But de la Fonction
+•	Objectif : Créer une fonction testAlpha qui vérifie si chaque caractère d'une chaîne de caractères (chaine) est présent dans un ensemble spécifié de caractères (alphabet).
+•	Résultat attendu : La fonction doit renvoyer true si tous les caractères de chaine sont dans alphabet, sinon elle doit renvoyer false.
+Étape 2 : Débuter la Définition de la Fonction
+•	Commencez par déclarer la fonction testAlpha qui prend un paramètre chaine.
+
+Étape 3 : Parcourir la Chaîne de Caractères (for)
+•	Utilisez une boucle for pour parcourir chaque caractère de chaine.
+
+Étape 4 : Vérifier la Présence des Caractères (includes)
+•	À l'intérieur de la boucle, vérifiez si le caractère actuel (chaine[i]) n'est pas dans alphabet (un ensemble de caractères autorisés).
+
+Étape 5 : Retourner false si un Caractère n'est pas dans alphabet (false)
+•	Si un caractère de chaine n'est pas trouvé dans alphabet, retournez false.
+
+Étape 6 : Retourner true si Tous les Caractères sont Validés (true)
+•	Si la boucle se termine sans trouver de caractère hors d’alphabet, cela signifie que tous les caractères sont valides. Donc, retournez true à la fin de la fonction.
+Pensez à utiliser des console.log() pour debugger votre function et voir vos étapes, en appelant toujours la fonction une fois déclarer exemple : 
+
+Function testAlpha(chaine){
+// votre code
+}
+// ma variable
+Let nom = « Momo « 
+// appel la function testAlpha
+testAlpha(nom)
